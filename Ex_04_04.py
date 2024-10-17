@@ -16,7 +16,8 @@ def create_table():
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     destination VARCHAR(50),
     expenses REAL,
-    time DATE
+    time DATE,
+    profit INTEGER
     );
     '''
     cursor.execute(query)
