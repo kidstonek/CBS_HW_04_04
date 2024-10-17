@@ -22,6 +22,7 @@ def add_expenses(destination: str, amount: float, time: str):
     cursor.execute(query, [destination, amount, time])
     conn.commit()
 
+
 def correct_date():
     year = input('please provide year: ')
     month = ''
