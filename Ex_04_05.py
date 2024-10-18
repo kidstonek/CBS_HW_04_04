@@ -52,6 +52,13 @@ def add_exchange(cur1: str, cur2: str, currency_value: float, times: str):
     cursor.execute(query, [cur1, cur2, currency_value, times])
     conn.commit()
 
+
+def receive_all_currences():
+    query = "SELECT currency1_name, currency2_name, currency_value, time FROM exchange"
+    result = cursor.execute(query)
+    return result.fetchall()
+
+
 url = 'https://api.monobank.ua/bank/currency'
 
 result = requests.get(url)
@@ -82,5 +89,5 @@ for exchange in result.json():
     else:
         cur_val = exchange.get('rateCross')
     add_exchange(cur_code_1,cur_code_2, cur_val, exchange.get('date'))
-
+    receive_all_currences() # not tested
 
