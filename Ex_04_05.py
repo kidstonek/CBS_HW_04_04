@@ -62,33 +62,25 @@ def currency_code(sample:int):
     if len(str(sample)) == 2:
         sample = '0' + str(sample)
     return sample
-# {'currencyCodeA': 826, 'currencyCodeB': 980, 'date': 1729257616, 'rateCross': 54.0408}
-# for i in xxz:
-#     if i.get('rateBuy'):
-#         print('yes')
-#     else:
-#         print('no ratebuy')
-# {'currencyCodeA': 840, 'currencyCodeB': 980, 'date': 1729112473, 'rateBuy': 41.05, 'rateSell': 41.4852}
+
+
 for exchange in result.json():
     print(exchange)
     cur_code1 = currency_code(exchange['currencyCodeA'])
     cur_code2 = currency_code(exchange['currencyCodeB'])
     try:
-        print(my_currencies.get(str(cur_code1))['currency_id'])
         cur_code_1 = my_currencies.get(str(cur_code1))['currency_id']
     except Exception as e:
-        print(e, 'NAN')
-        cur_code_1 = 'NAN'
+        cur_code_1 = 'Unknown currency'
     try:
-        print(my_currencies.get(str(cur_code1))['currency_id'])
+        print(my_currencies.get(str(cur_code2))['currency_id'])
         cur_code_2 = my_currencies.get(str(cur_code2))['currency_id']
     except Exception as e:
-        print(e, 'NAN')
-        cur_code_2 = 'NAN'
+        cur_code_2 = 'Unknown currency'
     if exchange.get('rateBuy'):
         cur_val = exchange.get('rateBuy')
     else:
         cur_val = exchange.get('rateCross')
-    add_exchange(cur_code1,cur_code2, cur_val, exchange.get('date'))
+    add_exchange(cur_code_1,cur_code_2, cur_val, exchange.get('date'))
 
 
